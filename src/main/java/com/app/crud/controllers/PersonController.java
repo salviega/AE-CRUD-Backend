@@ -41,4 +41,9 @@ public class PersonController {
             return "La persona no fue encontrada";
         }
     }
+    @DeleteMapping()
+    public String deletePeople() {
+        personService.deletePeople();
+        return "Todas las personas fueron eliminadas";
+    }
 }

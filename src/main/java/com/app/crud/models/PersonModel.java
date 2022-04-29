@@ -11,16 +11,19 @@ public class PersonModel {
     @Column(unique = true, nullable = false)
     private Long id;
     private String name;
-    private String last_name;
+    @Column(name = "last_name")
+    private String lastName;
     private String phone;
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "personModel")
+    private RolModel rol;
 
     public PersonModel() {
 
     }
-    public PersonModel(Long id, String name, String last_name, String phone) {
+    public PersonModel(Long id, String name, String lastName, String phone) {
         this.setId(id);
         this.setName(name);
-        this.setLast_name(last_name);
+        this.setLastName(lastName);
         this.setPhone(phone);
     }
 
@@ -41,12 +44,12 @@ public class PersonModel {
         this.name = name;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getPhone() {
@@ -55,5 +58,13 @@ public class PersonModel {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public RolModel getRol() {
+        return rol;
+    }
+
+    public void setRol(RolModel rol) {
+        this.rol = rol;
     }
 }

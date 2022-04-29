@@ -34,4 +34,7 @@ public class PersonService {
             return false;
         }
     }
+    public void deletePeople() {
+        personRepository.deleteAll();
+    }
 }
