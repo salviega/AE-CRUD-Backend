@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin
 @RestController
@@ -16,28 +17,28 @@ public class PersonController {
     private PersonService personService;
 
     @GetMapping
-    public List<PersonModel> getPeople(Long id) {
-        return personService.getPeople(id);
+    public List<PersonModel> getPeople() {
+        return personService.getPeople();
     }
     @GetMapping(path = "/{id}")
-    public PersonModel getPerson(Long id) {
+    public Optional<PersonModel> getPerson(@PathVariable("id") Long id) {
         return personService.getPerson(id);
     }
-    @PostMapping
+    @PostMapping()
     public PersonModel createPerson(@RequestBody PersonModel personModel) {
         return personService.createPerson(personModel);
     }
     @PutMapping(path = "/{id}")
-    public  PersonModel updatePerson(@RequestBody PersonModel personModel) {
+    public PersonModel updatePerson(@RequestBody PersonModel personModel) {
         return personService.updatePerson(personModel);
     }
     @DeleteMapping(path = "/{id}")
-    public String deletePerson(@PathVariable("id") Long id) {
-        boolean ok = this.personService.deletePerson(id);
-        if (ok) {
-            return "Se eliminó el usuario con id " + id;
+    public String deletePerson(Long id) {
+        boolean ok = personService.deletePerson(id);
+        if (ok == true) {
+            return "La persona fue eliminada";
         } else {
-            return "No pudo eliminar el usuario con id" + id;
+            return "La persona no fue encontrada";
         }
     }
 }

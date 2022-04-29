@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PersonService {
@@ -13,11 +14,11 @@ public class PersonService {
     @Autowired
     private IPersonRepository personRepository;
 
-    public List<PersonModel> getPeople(Long id) {
+    public List<PersonModel> getPeople() {
         return personRepository.findAll();
     }
-    public PersonModel getPerson(Long id) {
-        return personRepository.getById(id);
+    public Optional<PersonModel> getPerson(Long id) {
+        return personRepository.findById(id);
     }
     public PersonModel createPerson(PersonModel personModel) {
         return personRepository.save(personModel);
@@ -26,10 +27,10 @@ public class PersonService {
         return personRepository.save(personModel);
     }
     public boolean deletePerson(Long id) {
-        try{
+        try {
             personRepository.deleteById(id);
             return true;
-        }catch(Exception err){
+        } catch (Exception e) {
             return false;
         }
     }
