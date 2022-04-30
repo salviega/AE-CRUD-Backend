@@ -14,19 +14,18 @@ public class PersonModel {
     @Column(name = "last_name")
     private String lastName;
     private String phone;
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "personModel")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "rol_id")
     private RolModel rol;
 
     public PersonModel() {
 
     }
-    public PersonModel(Long id, String name, String lastName, String phone) {
-        this.setId(id);
+    public PersonModel(String name, String lastName, String phone) {
         this.setName(name);
         this.setLastName(lastName);
         this.setPhone(phone);
     }
-
 
     public Long getId() {
         return id;

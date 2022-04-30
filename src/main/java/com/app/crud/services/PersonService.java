@@ -13,7 +13,6 @@ public class PersonService {
 
     @Autowired
     private IPersonRepository personRepository;
-
     public List<PersonModel> getPeople() {
         return personRepository.findAll();
     }

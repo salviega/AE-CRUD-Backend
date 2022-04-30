@@ -1,6 +1,7 @@
 package com.app.crud.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "rol")
@@ -10,20 +11,18 @@ public class RolModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
     private Long id;
+    @Column(name = "rol_name")
     private String rolName;
     private String description;
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "persona_id")
-    private PersonModel personModel;
+    @OneToMany(mappedBy = "rol", cascade = {CascadeType.ALL})
+    private List<PersonModel> people;
 
     public RolModel() {
 
     }
-    public RolModel(Long id, String rolName, String description, PersonModel personModel) {
-        this.setId(id);
+    public RolModel(String rolName, String description) {
         this.setRolName(rolName);
         this.setDescription(description);
-        this.setPersonModel(personModel);
     }
 
     public Long getId() {
@@ -50,11 +49,11 @@ public class RolModel {
         this.description = description;
     }
 
-    public PersonModel getPersonModel() {
-        return personModel;
+    public List<PersonModel> getPeople() {
+        return people;
     }
 
-    public void setPersonModel(PersonModel personModel) {
-        this.personModel = personModel;
+    public void setPeople(List<PersonModel> people) {
+        this.people = people;
     }
 }
