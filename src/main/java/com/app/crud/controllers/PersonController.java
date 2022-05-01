@@ -40,8 +40,8 @@ public class PersonController {
         });
     }
     @PutMapping(path = "/{rolId}/people/{personId}")
-    public PersonModel updatePerson(@PathVariable(value = "personId") Long id, @PathVariable(value = "personId") Long personId, @RequestBody PersonModel personModel) {
-        Optional<PersonModel> findedPerson = personService.getPerson(id);
+    public PersonModel updatePerson(@PathVariable(value = "personId") Long personId, @RequestBody PersonModel personModel) {
+        Optional<PersonModel> findedPerson = personService.getPerson(personId);
         findedPerson.get().setName(personModel.getName());
         findedPerson.get().setLastName(personModel.getLastName());
         findedPerson.get().setPhone(personModel.getPhone());
