@@ -1,7 +1,5 @@
 package com.app.crud.controllers;
 
-import com.app.crud.models.PersonModel;
-import com.app.crud.services.PersonService;
 import com.app.crud.services.RolService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
